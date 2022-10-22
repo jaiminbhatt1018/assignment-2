@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log In Page</title>
+    <link rel="stylesheet" href="./style/style.css" type="text/css">
+
+</head>
+
+<body>
+    <div class="container flex-center">
+        <div class="header">
+            <h1>Log In</h1>
+        </div>
+        <div class="err">
+        </div>
+       
+            <div class="flex-center">
+                
+                <div class="username">
+                    <input type="text" placeholder="enter username" name="username" id="txtusername" required>
+                </div>
+                <div class="password">
+                    <input type="password" name="password" placeholder="enter password" id="txtpassword" required>
+                </div>
+                <div class="submit">
+                    <button type="submit" value="Log In" onclick="handleLogin()"> Log in</button>
+                </div>
+            </div>
+       
+    </div>
+</body>
+
+<script>
+    const usernameField = document.getElementById("txtusername")
+    const passwordField = document.getElementById("txtpassword")
+
+    const handleLogin = async () => {
+        let username = usernameField.value
+        let password = passwordField.value
+        postData('http://localhost:8000/login', { username, password })
+            .then((data) => {
+                if (data) {
+                    localStorage.setItem('authToken', data)
+                    window.location.replace('./index.html')
+                }
+            }).catch(error => {
+                console.log(error)
+            });
+    }
+
+    async function postData(url = '', data = {}) {
+        try {
+            const response = await fetch(url, {
+                method: 'POST', 
+            
+                headers: {
+                    'Content-Type': 'application/json'
+                  
+                },
+    
+                body: JSON.stringify(data) 
+            });
+            if (response.status === 200) {
+                return response.json(); 
+            } else {
+                let msg = await response.json()
+                alert(msg)
+            }
+        } catch (error) {
+            alert(error)
+        }
+
+    }
+
+</script>
+
+</html>

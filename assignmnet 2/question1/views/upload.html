@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload single/multiple image</title>
+    <!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="d-flex flex-column justify-content-between container mt-5">
+        <div>
+            <div>
+                <h3>Upload file </h3>
+            </div>
+            <form action="/upload" method="post" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label for="formFile" class="form-label" name="file">Default file input example</label>
+                    <input class="form-control" type="file" id="formFile">
+                  </div>
+                <input type="submit" class="btn btn-success" value="upload">
+            </form>
+        </div>
+
+        <div>
+            <div>
+                <h3>Upload Multiple files</h3>
+            </div>
+            <form action="/upload-multiple" method="post" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label for="formFile" class="form-label" name="file">Default file input example</label>
+                    <input class="form-control" type="file"  name="files" id="formFiles" multiple="multiple">
+                  </div>
+                <input type="submit" class="btn btn-success" value="upload">
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
